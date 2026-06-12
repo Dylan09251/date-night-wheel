@@ -1,102 +1,100 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>❤️ Date Night Wheel ❤️</title>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <style>
 body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#ff4d6d,#ff758f,#ffb3c1);
-    font-family:Arial,sans-serif;
+margin:0;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff4d6d,#ff758f,#ffb3c1);
+font-family:Arial,sans-serif;
 }
 
 .container{
-    text-align:center;
+text-align:center;
 }
 
 h1{
-    color:white;
-    font-size:3rem;
-    text-shadow:0 0 20px rgba(255,255,255,.6);
+color:white;
+font-size:3rem;
+text-shadow:0 0 20px rgba(255,255,255,.6);
 }
 
 .wheel-wrap{
-    position:relative;
-    width:550px;
-    height:550px;
-    margin:auto;
+position:relative;
+width:520px;
+height:520px;
+margin:auto;
 }
 
 .pointer{
-    position:absolute;
-    top:-18px;
-    left:50%;
-    transform:translateX(-50%);
-    width:0;
-    height:0;
-    border-left:25px solid transparent;
-    border-right:25px solid transparent;
-    border-top:50px solid gold;
-    z-index:10;
+position:absolute;
+top:-18px;
+left:50%;
+transform:translateX(-50%);
+width:0;
+height:0;
+border-left:25px solid transparent;
+border-right:25px solid transparent;
+border-top:50px solid gold;
+z-index:10;
 }
 
 #wheel{
-    width:100%;
-    height:100%;
-    border-radius:50%;
-    border:12px solid gold;
-    box-shadow:0 0 40px gold;
-    transition:transform 8s cubic-bezier(.15,.9,.15,1);
+width:100%;
+height:100%;
+border-radius:50%;
+border:10px solid gold;
+box-shadow:0 0 35px gold;
+transition:transform 6.5s cubic-bezier(.15,.9,.15,1);
 }
 
 .center-photo{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:140px;
-    height:140px;
-    border-radius:50%;
-    overflow:hidden;
-    border:6px solid white;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:130px;
+height:130px;
+border-radius:50%;
+overflow:hidden;
+border:5px solid white;
 }
 
 .center-photo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 button{
-    margin-top:25px;
-    padding:16px 40px;
-    border:none;
-    border-radius:40px;
-    font-size:1.2rem;
-    cursor:pointer;
-    font-weight:bold;
+margin-top:20px;
+padding:14px 35px;
+border:none;
+border-radius:30px;
+font-size:1.1rem;
+cursor:pointer;
+font-weight:bold;
 }
 
 #result{
-    margin-top:25px;
-    color:white;
-    font-size:2rem;
-    min-height:60px;
-    font-weight:bold;
+margin-top:20px;
+color:white;
+font-size:1.8rem;
+font-weight:bold;
+min-height:50px;
 }
 </style>
-
 </head>
+
 <body>
 
 <div class="container">
@@ -104,7 +102,6 @@ button{
 <h1>❤️ Our Date Night Wheel ❤️</h1>
 
 <div class="wheel-wrap">
-
 <div class="pointer"></div>
 
 <canvas id="wheel" width="600" height="600"></canvas>
@@ -112,7 +109,6 @@ button{
 <div class="center-photo">
 <img src="photo.jpg">
 </div>
-
 </div>
 
 <button onclick="spinWheel()">🎉 SPIN 🎉</button>
@@ -125,146 +121,129 @@ button{
 
 const options = [
 "🌅 Sunset at Friendship Fountain (Downtown Riverwalk)",
-"🍷 River & Post Rooftop Dinner (Riverside skyline views)",
-"🇫🇷 Italian NIGHT",
+"🍷 River & Post Rooftop Dinner",
+"🇫🇷 Italian Night",
 "🥩 Steak Dinner",
-"🌮 Riverside / 5 Points Food Crawl + Walk",
-"🌊 Jacksonville Beach Sunset Walk + Pier",
-"🍕 Moon River Pizza + Riverside Walk",
+"🌮 Food Crawl (5 Points / Riverside)",
+"🌊 Jacksonville Beach Sunset Walk",
+"🍕 Pizza + Riverside Walk",
 "☕ Coffee + Bookstore Date",
-"🚤 St. Johns River Night Walk + City Lights",
-"🍸 San Marco Square Dinner + Park Walk",
-"🧺 Picnic at Jacksonville Arboretum & Gardens",
-"🎬 Movie Night at Tinseltown",
-"💌 Mystery Date Planned by Dylan (No Questions Asked)",
-" Stay in and cook together + Movie night"    
+"🚤 St. Johns River Night Walk",
+"🍸 San Marco Dinner + Walk",
+"🧺 Arboretum Picnic",
+"🎬 Movie Night",
+"💌 Mystery Date (No Questions Asked)",
+"🏠 Stay In + Cook Together"
 ];
 
 const colors = [
-"#ff595e",
-"#ffca3a",
-"#8ac926",
-"#1982c4",
-"#6a4c93",
-"#ff006e",
-"#8338ec",
-"#3a86ff",
-"#fb5607",
-"#06d6a0"
+"#ff595e","#ffca3a","#8ac926","#1982c4","#6a4c93",
+"#ff006e","#8338ec","#3a86ff","#fb5607","#06d6a0",
+"#ffd166","#ef476f","#118ab2","#073b4c"
 ];
 
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-const arc = 2*Math.PI/options.length;
+const arc = (2 * Math.PI) / options.length;
 
+let rotation = 0;
+
+/* 🎡 DRAW WHEEL (FIXED ALIGNMENT) */
 function drawWheel(){
+
+ctx.clearRect(0,0,600,600);
 
 for(let i=0;i<options.length;i++){
 
-let angle=i*arc;
+let angle = i * arc;
 
 ctx.beginPath();
 ctx.moveTo(300,300);
 ctx.arc(300,300,300,angle,angle+arc);
-ctx.fillStyle=colors[i];
+ctx.fillStyle = colors[i];
 ctx.fill();
 
 ctx.save();
-
 ctx.translate(300,300);
-ctx.rotate(angle+arc/2);
+
+/* 🔥 FIX: rotate so pointer (top) matches slice */
+ctx.rotate(angle + arc/2 - Math.PI/2);
 
 ctx.fillStyle="white";
-ctx.font="bold 20px Arial";
-
-ctx.fillText(options[i],130,5);
+ctx.font="bold 18px Arial";
+ctx.fillText(options[i],120,5);
 
 ctx.restore();
 }
 }
 
-drawWheel();
-
-let rotation=0;
+/* 🔊 AUDIO TICK (optimized) */
+let audioCtx;
 
 function playTick(){
+if(!audioCtx){
+audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
 
-const audioCtx =
-new(window.AudioContext||window.webkitAudioContext)();
-
-const osc =
-audioCtx.createOscillator();
-
-const gain =
-audioCtx.createGain();
+const osc = audioCtx.createOscillator();
+const gain = audioCtx.createGain();
 
 osc.connect(gain);
 gain.connect(audioCtx.destination);
 
-osc.type="square";
-osc.frequency.value=1200;
+osc.type = "square";
+osc.frequency.value = 1000;
 
-gain.gain.setValueAtTime(
-0.05,
-audioCtx.currentTime
-);
-
-gain.gain.exponentialRampToValueAtTime(
-0.0001,
-audioCtx.currentTime+0.05
-);
+gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.05);
 
 osc.start();
-osc.stop(audioCtx.currentTime+0.05);
+osc.stop(audioCtx.currentTime + 0.05);
 }
 
+/* 🎡 SPIN (FIXED ALIGNMENT LOGIC) */
 function spinWheel(){
 
-document.getElementById("result").innerHTML="";
+document.getElementById("result").innerHTML = "";
 
-const extra =
-3600 + Math.random()*1800;
+const spinTime = 6500;
+const extra = 3600 + Math.random() * 1800;
 
 rotation += extra;
 
-document.getElementById("wheel")
-.style.transform =
+document.getElementById("wheel").style.transform =
 `rotate(${rotation}deg)`;
 
-let speed=60;
-
-const ticks = setInterval(()=>{
-playTick();
-},speed);
+const tick = setInterval(playTick, 70);
 
 setTimeout(()=>{
 
-clearInterval(ticks);
+clearInterval(tick);
 
+/* 🔥 FIXED ALIGNMENT MATH */
 const normalized =
-(360-(rotation%360))%360;
+((rotation % 360) + 90) % 360;
 
 const index =
-Math.floor(
-normalized/(360/options.length)
-);
+Math.floor(normalized / (360 / options.length));
 
-const winner =
-options[index];
+const winner = options[index];
 
 document.getElementById("result").innerHTML =
 `Tonight: ${winner}`;
 
 confetti({
-particleCount:250,
-spread:180,
-origin:{y:0.6}
+particleCount: 250,
+spread: 180,
+origin: { y: 0.6 }
 });
 
-},8000);
-
+}, spinTime);
 }
+
+drawWheel();
+
 </script>
 
 </body>

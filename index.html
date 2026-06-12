@@ -32,8 +32,8 @@ h1{
 
 .wheel-wrap{
     position:relative;
-    width:550px;
-    height:550px;
+    width:600px;
+    height:600px;
     margin:auto;
 }
 
@@ -152,7 +152,7 @@ const colors = [
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-const arc = 2*Math.PI/options.length;
+const arc = 2*Math.Floornormilized/360;
 
 function drawWheel(){
 

@@ -152,7 +152,7 @@ const colors = [
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-const arc = 2*Math.Floornormilized/360;
+const arc = 2*Math.PI/options.length;
 
 function drawWheel(){
 
@@ -243,7 +243,7 @@ const normalized =
 
 const index =
 Math.floor(
-normalized/(360/options.length)
+normalized/(360)
 );
 
 const winner =

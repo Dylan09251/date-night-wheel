@@ -1,85 +1,121 @@
-<!DOCTYPE html>
+!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fixed Date Wheel</title>
+
+<title>❤️ Date Night Wheel ❤️</title>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <style>
 body{
-margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#ff4d6d,#ff758f,#ffb3c1);
-font-family:Arial;
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff4d6d,#ff758f,#ffb3c1);
+    font-family:Arial,sans-serif;
 }
 
-.container{text-align:center;}
+.container{
+    text-align:center;
+}
 
-h1{color:white}
+h1{
+    color:white;
+    font-size:3rem;
+    text-shadow:0 0 20px rgba(255,255,255,.6);
+}
 
 .wheel-wrap{
-position:relative;
-width:520px;
-height:520px;
+    position:relative;
+    width:550px;
+    height:550px;
+    margin:auto;
 }
 
 .pointer{
-position:absolute;
-top:-10px;
-left:50%;
-transform:translateX(-50%);
-width:0;
-height:0;
-border-left:20px solid transparent;
-border-right:20px solid transparent;
-border-top:40px solid gold;
-z-index:10;
+    position:absolute;
+    top:-18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:0;
+    height:0;
+    border-left:25px solid transparent;
+    border-right:25px solid transparent;
+    border-top:50px solid gold;
+    z-index:10;
 }
 
-canvas{
-width:100%;
-height:100%;
-border-radius:50%;
-border:10px solid gold;
-transition:transform 6.5s cubic-bezier(.17,.67,.12,.99);
+#wheel{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    border:12px solid gold;
+    box-shadow:0 0 40px gold;
+    transition:transform 8s cubic-bezier(.15,.9,.15,1);
+}
+
+.center-photo{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    overflow:hidden;
+    border:6px solid white;
+}
+
+.center-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 button{
-margin-top:20px;
-padding:12px 30px;
-border:none;
-border-radius:25px;
-font-size:16px;
-cursor:pointer;
-font-weight:bold;
+    margin-top:25px;
+    padding:16px 40px;
+    border:none;
+    border-radius:40px;
+    font-size:1.2rem;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 #result{
-color:white;
-font-size:24px;
-margin-top:15px;
-min-height:40px;
+    margin-top:25px;
+    color:white;
+    font-size:2rem;
+    min-height:60px;
+    font-weight:bold;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <div class="container">
 
-<h1>❤️ Date Wheel</h1>
+<h1>❤️ Our Date Night Wheel ❤️</h1>
 
 <div class="wheel-wrap">
+
 <div class="pointer"></div>
+
 <canvas id="wheel" width="600" height="600"></canvas>
+
+<div class="center-photo">
+<img src="photo.jpg">
 </div>
 
-<button onclick="spin()">SPIN</button>
+</div>
+
+<button onclick="spinWheel()">🎉 SPIN 🎉</button>
 
 <div id="result"></div>
 
@@ -88,122 +124,143 @@ min-height:40px;
 <script>
 
 const options = [
-"Sunset Riverwalk",
-"Rooftop Dinner",
-"Italian Night",
-"Steak Dinner",
-"Food Crawl",
-"Beach Walk",
-"Pizza Night",
-"Coffee Date"
+"🍕 Pizza & Movie",
+"🌅 Sunset Picnic",
+"🎳 Bowling",
+"🍦 Ice Cream Run",
+"☕ Coffee Date",
+"⭐ Stay home cook/movie",
+"🎮 Game Night",
+"🍣 New Restaurant",
+"🚗 Italian Night",
+"❤️ Surprise Date Planned By Dylan"
+];
+
+const colors = [
+"#ff595e",
+"#ffca3a",
+"#8ac926",
+"#1982c4",
+"#6a4c93",
+"#ff006e",
+"#8338ec",
+"#3a86ff",
+"#fb5607",
+"#06d6a0"
 ];
 
 const canvas = document.getElementById("wheel");
 const ctx = canvas.getContext("2d");
 
-const center = 300;
-const radius = 280;
+const arc = 2*Math.PI/options.length;
 
-let rotation = 0;
-
-/* 🎯 FIXED ANGLE SYSTEM */
-const arc = (2 * Math.PI) / options.length;
-
-/* DRAW WHEEL */
 function drawWheel(){
-
-ctx.clearRect(0,0,600,600);
 
 for(let i=0;i<options.length;i++){
 
-const start = i * arc;
-const end = start + arc;
+let angle=i*arc;
 
 ctx.beginPath();
-ctx.moveTo(center,center);
-ctx.arc(center,center,radius,start,end);
-ctx.fillStyle = `hsl(${i*40},80%,60%)`;
+ctx.moveTo(300,300);
+ctx.arc(300,300,300,angle,angle+arc);
+ctx.fillStyle=colors[i];
 ctx.fill();
 
-/* text */
 ctx.save();
-ctx.translate(center,center);
 
-/* 🔥 KEY FIX: rotate everything so top is 0 */
-ctx.rotate(start + arc/2 - Math.PI/2);
+ctx.translate(300,300);
+ctx.rotate(angle+arc/2);
 
-ctx.fillStyle = "white";
-ctx.font = "16px Arial";
-ctx.fillText(options[i], 120, 0);
+ctx.fillStyle="white";
+ctx.font="bold 20px Arial";
+
+ctx.fillText(options[i],130,5);
 
 ctx.restore();
 }
 }
 
-/* 🔊 simple tick */
-let audioCtx;
-function tick(){
-if(!audioCtx){
-audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+drawWheel();
+
+let rotation=0;
+
+function playTick(){
+
+const audioCtx =
+new(window.AudioContext||window.webkitAudioContext)();
+
+const osc =
+audioCtx.createOscillator();
+
+const gain =
+audioCtx.createGain();
+
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+
+osc.type="square";
+osc.frequency.value=1200;
+
+gain.gain.setValueAtTime(
+0.05,
+audioCtx.currentTime
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+audioCtx.currentTime+0.05
+);
+
+osc.start();
+osc.stop(audioCtx.currentTime+0.05);
 }
 
-const o = audioCtx.createOscillator();
-const g = audioCtx.createGain();
+function spinWheel(){
 
-o.connect(g);
-g.connect(audioCtx.destination);
+document.getElementById("result").innerHTML="";
 
-o.frequency.value = 1200;
-g.gain.value = 0.03;
-
-o.start();
-o.stop(audioCtx.currentTime + 0.03);
-}
-
-/* 🎡 SPIN (CORRECT MATH) */
-function spin(){
-
-const spinTime = 6000;
-const extra = 3600 + Math.random()*1800;
+const extra =
+3600 + Math.random()*1800;
 
 rotation += extra;
 
-/* rotate wheel visually */
-canvas.style.transform = `rotate(${rotation}deg)`;
+document.getElementById("wheel")
+.style.transform =
+`rotate(${rotation}deg)`;
 
-const interval = setInterval(tick, 60);
+let speed=60;
+
+const ticks = setInterval(()=>{
+playTick();
+},speed);
 
 setTimeout(()=>{
 
-clearInterval(interval);
+clearInterval(ticks);
 
-/* 🔥 FINAL FIX: convert CSS rotation → wheel angle */
-const normalized = (rotation % 360);
+const normalized =
+(360-(rotation%360))%360;
 
-/* convert to radians system match */
-const degreesPerSlice = 360 / options.length;
+const index =
+Math.floor(
+normalized/(360/options.length)
+);
 
-/* pointer is at top → adjust by -90 degrees */
-const adjusted = (360 - normalized + 90) % 360;
+const winner =
+options[index];
 
-const index = Math.floor(adjusted / degreesPerSlice);
-
-const winner = options[index];
-
-document.getElementById("result").innerText =
-"Tonight: " + winner;
+document.getElementById("result").innerHTML =
+`Tonight: ${winner}`;
 
 confetti({
-particleCount:200,
-spread:160,
+particleCount:250,
+spread:180,
 origin:{y:0.6}
 });
 
-}, spinTime);
+},8000);
+
 }
-
-drawWheel();
-
 </script>
 
 </body>
